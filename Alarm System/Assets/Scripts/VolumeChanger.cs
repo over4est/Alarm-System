@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-
 public class VolumeChanger : MonoBehaviour
 {
     [SerializeField] private float _delay;

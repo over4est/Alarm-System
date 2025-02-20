@@ -7,13 +7,23 @@ public class AlarmSystem : MonoBehaviour
 
     private void OnEnable()
     {
-        _thiefDetector.ThiefDetected += _volumeChanger.IncreaseVolume;
-        _thiefDetector.ThiefGone += _volumeChanger.DecreaseVolume;
+        _thiefDetector.ThiefDetected += IncreaseVolume;
+        _thiefDetector.ThiefGone += DecreaseVolume;
     }
 
     private void OnDisable()
     {
-        _thiefDetector.ThiefDetected -= _volumeChanger.IncreaseVolume;
-        _thiefDetector.ThiefGone -= _volumeChanger.DecreaseVolume;
+        _thiefDetector.ThiefDetected -= IncreaseVolume;
+        _thiefDetector.ThiefGone -= DecreaseVolume;
+    }
+
+    private void IncreaseVolume()
+    {
+        _volumeChanger.IncreaseVolume();
+    }
+
+    private void DecreaseVolume()
+    {
+        _volumeChanger.DecreaseVolume();
     }
 }
