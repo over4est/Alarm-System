@@ -12,9 +12,11 @@ public class VolumeChanger : MonoBehaviour
     private float _minVolume = 0;
     private Coroutine _corutine;
 
+    public bool IsAlarmActive => _audioSource.isPlaying; 
+
     public void IncreaseVolume()
     {
-        if (_audioSource.isPlaying == false)
+        if (IsAlarmActive == false)
         {
             _audioSource.Play();
         }
@@ -46,6 +48,11 @@ public class VolumeChanger : MonoBehaviour
             _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, target, changeValue);
 
             yield return wait;
+        }
+
+        if (_audioSource.volume == _minVolume)
+        {
+            _audioSource.Pause();
         }
     }
 }

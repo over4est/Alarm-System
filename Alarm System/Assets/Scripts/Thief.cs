@@ -8,8 +8,6 @@ public class Thief : MonoBehaviour
 
     private Mover _mover;
 
-    public Vector3 MovementStep => _movementSpeed * _direction;
-
     private void Awake()
     {
         _mover = GetComponent<Mover>();

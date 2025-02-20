@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class AlarmSystem : MonoBehaviour
 {
-    [SerializeField] private Transform _protectedObject;
     [SerializeField] private List<ThiefDetector> _thiefDetectors;
     [SerializeField] private VolumeChanger _volumeChanger;
 
@@ -23,20 +22,15 @@ public class AlarmSystem : MonoBehaviour
         }
     }
 
-    private void DetectionHandling(Vector3 detectorPosition, Vector3 thiefMovementStep)
+    private void DetectionHandling()
     {
-        Vector3 thiefNextPosition = detectorPosition + thiefMovementStep;
-        float sqrDetectorDistanceToObject = (_protectedObject.position - detectorPosition).sqrMagnitude;
-        float sqrThiefDistanceToObject = (_protectedObject.position - thiefNextPosition).sqrMagnitude;
-
-        if (sqrThiefDistanceToObject <= sqrDetectorDistanceToObject)
-        {
-            _volumeChanger.IncreaseVolume();
-        }
-
-        if (sqrThiefDistanceToObject > sqrDetectorDistanceToObject)
+        if (_volumeChanger.IsAlarmActive)
         {
             _volumeChanger.DecreaseVolume();
+        }
+        else
+        {
+            _volumeChanger.IncreaseVolume();
         }
     }
 }

@@ -905,7 +905,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88747a0161688534ea73c9ee0fc1052c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _protectedObject: {fileID: 599517098}
   _thiefDetectors:
   - {fileID: 700529649}
   - {fileID: 463225267}
@@ -1073,7 +1072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc38d3107b563c489d69cb80cb09cd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 1
+  _movementSpeed: 2
   _direction: {x: 1, y: 0, z: 0}
 --- !u!54 &2141808222
 Rigidbody:

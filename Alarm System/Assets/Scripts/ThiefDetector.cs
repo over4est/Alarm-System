@@ -3,21 +3,13 @@ using UnityEngine;
 
 public class ThiefDetector : MonoBehaviour
 {
-    public event Action<Vector3, Vector3> ThiefDetected;
+    public event Action ThiefDetected;
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.TryGetComponent<Thief>(out Thief thief))
+        if (collider.TryGetComponent<Thief>(out _))
         {
-            ThiefDetected?.Invoke(transform.position, thief.MovementStep);
-        }
-    }
-
-    private void OnTriggerExit(Collider collider)
-    {
-        if (collider.TryGetComponent<Thief>(out Thief thief))
-        {
-            ThiefDetected?.Invoke(transform.position, thief.MovementStep);
+            ThiefDetected?.Invoke();
         }
     }
 }
