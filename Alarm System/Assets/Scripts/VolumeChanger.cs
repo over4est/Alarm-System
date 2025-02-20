@@ -12,7 +12,7 @@ public class VolumeChanger : MonoBehaviour
     private float _minVolume = 0;
     private Coroutine _corutine;
 
-    public bool IsAlarmActive => _audioSource.isPlaying; 
+    public bool IsAlarmActive => _audioSource.isPlaying;
 
     public void IncreaseVolume()
     {
@@ -21,22 +21,12 @@ public class VolumeChanger : MonoBehaviour
             _audioSource.Play();
         }
 
-        if (_corutine != null)
-        {
-            StopCoroutine(_corutine);
-        }
-
-        _corutine = StartCoroutine(ChangeVolume(_delay, _changeValue, _maxVolume));
+        RestartCorutine(_maxVolume);
     }
 
     public void DecreaseVolume()
     {
-        if (_corutine != null)
-        {
-            StopCoroutine(_corutine);
-        }
-
-        _corutine = StartCoroutine(ChangeVolume(_delay, _changeValue, _minVolume));
+        RestartCorutine(_minVolume);
     }
 
     private IEnumerator ChangeVolume(float delay, float changeValue, float target)
@@ -54,5 +44,15 @@ public class VolumeChanger : MonoBehaviour
         {
             _audioSource.Pause();
         }
+    }
+
+    private void RestartCorutine(float target)
+    {
+        if (_corutine != null)
+        {
+            StopCoroutine(_corutine);
+        }
+
+        _corutine = StartCoroutine(ChangeVolume(_delay, _changeValue, target));
     }
 }

@@ -1,36 +1,19 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class AlarmSystem : MonoBehaviour
 {
-    [SerializeField] private List<ThiefDetector> _thiefDetectors;
+    [SerializeField] private ThiefDetector _thiefDetector;
     [SerializeField] private VolumeChanger _volumeChanger;
 
     private void OnEnable()
     {
-        foreach (ThiefDetector thiefDetector in _thiefDetectors)
-        {
-            thiefDetector.ThiefDetected += DetectionHandling;
-        }
+        _thiefDetector.ThiefDetected += _volumeChanger.IncreaseVolume;
+        _thiefDetector.ThiefGone += _volumeChanger.DecreaseVolume;
     }
 
     private void OnDisable()
     {
-        foreach (ThiefDetector thiefDetector in _thiefDetectors)
-        {
-            thiefDetector.ThiefDetected -= DetectionHandling;
-        }
-    }
-
-    private void DetectionHandling()
-    {
-        if (_volumeChanger.IsAlarmActive)
-        {
-            _volumeChanger.DecreaseVolume();
-        }
-        else
-        {
-            _volumeChanger.IncreaseVolume();
-        }
+        _thiefDetector.ThiefDetected -= _volumeChanger.IncreaseVolume;
+        _thiefDetector.ThiefGone -= _volumeChanger.DecreaseVolume;
     }
 }
